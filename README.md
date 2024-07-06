@@ -63,6 +63,20 @@ You can run [`dvc pull`](https://man.dvc.org/pull) to download the data:
 $ dvc pull
 ```
 
+#### Configuring Google drive as Data Remote Storage
+
+You can configure Google drive as your data storage remotes. You can consult the remote storage [guide](https://dvc.org/doc/user-guide/data-management/remote-storage/google-drive) for how to set it up. The lines below shows how to use a subdirectory of a google drive folder as a remote storage and setting up access with Access and authorization using service account
+
+```console
+$ dvc remote add --default <remote name> \
+    gdrive://<Folder ID>/example-get-started-experiments
+$ dvc remote modify <remote name> gdrive_acknowledge_abuse true
+$ dvc remote modify <remote name> gdrive_use_service_account true
+$ dvc remote modify <remote name> --local \
+        gdrive_service_account_json_file_path path/to/file.json
+$ dvc push
+```
+
 ## Running in your environment
 
 Run [`dvc exp run`](https://man.dvc.org/exp/run) to reproduce the

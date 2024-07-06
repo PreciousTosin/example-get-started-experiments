@@ -1,24 +1,12 @@
-[![DVC](https://img.shields.io/badge/-Open_in_Studio-grey.svg?style=flat-square&logo=dvc)](https://studio.iterative.ai/team/Iterative/projects/example-get-started-experiments-y8toqd433r) 
-[![DVC-metrics](https://img.shields.io/badge/dynamic/json?style=flat-square&colorA=grey&colorB=F46737&label=Dice%20Metric&url=https://github.com/iterative/example-get-started-experiments/raw/main/results/evaluate/metrics.json&query=dice_multi)](https://github.com/iterative/example-get-started-experiments/raw/main/results/evaluate/metrics.json)
-
-[Train Report](./results/train/report.md) - [Evaluation Report](./results/evaluate/report.md)
-
 # DVC Get Started: Experiments
 
-This is an auto-generated repository for use in [DVC](https://dvc.org)
-[Get Started: Experiments](https://dvc.org/doc/start/experiment-management).
-
-This is a Computer Vision (CV) project that solves the problem of segmenting out 
-swimming pools from satellite images. 
+This is a Computer Vision (CV) project that solves the problem of segmenting out
+swimming pools from satellite images. It is based on the auto-generated [repository](https://github.com/iterative/example-get-started-experiments) for [Get Started: Experiments](https://dvc.org/doc/start/experiment-management) which demonstartes how [DVC](https://dvc.org) can be used in machine learning experiment tracking.
 
 [Example results](./results/evaluate/plots/images/)
 
 We use a slightly modified version of the [BH-Pools dataset](http://patreo.dcc.ufmg.br/2020/07/29/bh-pools-watertanks-datasets/):
 we split the original 4k images into tiles of 1024x1024 pixels.
-
-
-🐛 Please report any issues found in this project here -
-[example-repos-dev](https://github.com/iterative/example-repos-dev).
 
 ## Installation
 
@@ -31,7 +19,26 @@ $ cd example-get-started-experiments
 
 Now let's install the requirements. But before we do that, we **strongly**
 recommend creating a virtual environment with a tool such as
-[virtualenv](https://virtualenv.pypa.io/en/stable/):
+[virtualenv](https://virtualenv.pypa.io/en/stable/) or [conda environment](https://docs.anaconda.com/working-with-conda/environments/) Conda is prefereable if it is installed:
+
+### Conda
+
+```console
+$ conda info --envs (view environments)
+$ conda create -n <ENV_NAME>
+$ conda activate <ENV_NAME>
+$ pip install -r requirements.txt
+```
+
+Or if you want to use the conda `environment.yml` file in this repo:
+
+```console
+$ conda env create -f environment.yml
+$ conda activate <ENV_NAME>
+$ pip install -r requirements.txt
+```
+
+### Virtualenv
 
 ```console
 $ python -m venv .venv
@@ -39,14 +46,15 @@ $ source .venv/bin/activate
 $ pip install -r requirements.txt
 ```
 
+### Data Remote Storage
+
 This DVC project comes with a preconfigured DVC
 [remote storage](https://dvc.org/doc/commands-reference/remote) that holds raw
-data (input), intermediate, and final results that are produced. This is a
-read-only HTTP remote.
+data (input), intermediate, and final results that are produced.
 
 ```console
 $ dvc remote list
-storage  https://remote.dvc.org/get-started-pools
+gdrive-remote   gdrive://1Ue10yGRbWC3gN9mMdCz6QhLv33wne8tq/example-get-started-experiments
 ```
 
 You can run [`dvc pull`](https://man.dvc.org/pull) to download the data:
@@ -89,23 +97,23 @@ There is a couple of git tags in this project :
 
 ### [1-notebook-dvclive](https://github.com/iterative/example-get-started-experiments/tree/1-notebook-dvclive)
 
-Contains an end-to-end Jupyter notebook that loads data, trains a model and 
-reports model performance. 
-[DVCLive](https://dvc.org/doc/dvclive) is used for experiment tracking. 
+Contains an end-to-end Jupyter notebook that loads data, trains a model and
+reports model performance.
+[DVCLive](https://dvc.org/doc/dvclive) is used for experiment tracking.
 See this [blog post](https://iterative.ai/blog/exp-tracking-dvc-python) for more
 details.
 
 ### [2-dvc-pipeline](https://github.com/iterative/example-get-started-experiments/tree/2-dvc-pipeline)
 
-Contains a DVC pipeline `dvc.yaml` that was created by refactoring the above 
-notebook into individual pipeline stages. 
+Contains a DVC pipeline `dvc.yaml` that was created by refactoring the above
+notebook into individual pipeline stages.
 
-The pipeline artifacts (processed data, model file, etc) are automatically 
-versioned. 
+The pipeline artifacts (processed data, model file, etc) are automatically
+versioned.
 
 This tag also contains a GitHub Actions workflow that reruns the pipeline if any
- changes are introduced to the pipeline-related files. 
-[CML](https://cml.dev/) is used in this workflow to provision a cloud-based GPU 
+changes are introduced to the pipeline-related files.
+[CML](https://cml.dev/) is used in this workflow to provision a cloud-based GPU
 machine as well as report model performance results in Pull Requests.
 
 ## Model Deployment
@@ -135,7 +143,7 @@ $ tree -L 2
 ├── models
 │   └── model.pkl    # <-- Trained model file
 ├── notebooks
-│   └── TrainSegModel.ipynb # <-- Initial notebook (refactored into `dvc.yaml`) 
+│   └── TrainSegModel.ipynb # <-- Initial notebook (refactored into `dvc.yaml`)
 ├── params.yaml      # <-- Parameters file
 ├── requirements.txt # <-- Python dependencies needed in the project
 ├── results          # <-- DVCLive reports and plots

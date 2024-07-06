@@ -13,7 +13,7 @@ we split the original 4k images into tiles of 1024x1024 pixels.
 Python 3.8+ is required to run code from this repo.
 
 ```console
-$ git clone https://github.com/iterative/example-get-started-experiments
+$ git clone https://github.com/PreciousTosin/example-get-started-experiments.git
 $ cd example-get-started-experiments
 ```
 

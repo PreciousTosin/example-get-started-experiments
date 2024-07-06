@@ -10,8 +10,8 @@ stages:
       nfiles: 183
     - path: src/data_split.py
       hash: md5
-      md5: 280fa1684c5496fb9f76ff8c96bd2561
-      size: 1035
+      md5: f8d5b33ea4c5a78fb2feb1e004de645b
+      size: 2016
     params:
       params.yaml:
         base:
@@ -19,6 +19,7 @@ stages:
         data_split:
           test_regions:
           - REGION_1
+          test_pct: 0.1
     outs:
     - path: data/test_data
       hash: md5
@@ -49,7 +50,7 @@ stages:
         train:
           valid_pct: 0.1
           arch: shufflenet_v2_x2_0
-          img_size: 256
+          img_size: 384
           batch_size: 8
           fine_tune_args:
             epochs: 8
@@ -57,16 +58,16 @@ stages:
     outs:
     - path: models/model.pkl
       hash: md5
-      md5: 63cb30df484bfa1d6ea2cdebac74876c
-      size: 201725
+      md5: 518c16f42d088a9a11bf3212c475c632
+      size: 201277
     - path: models/model.pth
       hash: md5
-      md5: 07b113fe1ab01de2d8a5453dccacdd3e
-      size: 165147
+      md5: 201f1e058e7b3aabc841078da26dc039
+      size: 164827
     - path: results/train
       hash: md5
-      md5: a26429ff680d9b01c7e92043821bf41c.dir
-      size: 955
+      md5: 77310b6e1dad3e587d3631b45d32fd1a.dir
+      size: 959
       nfiles: 5
   evaluate:
     cmd: python src/evaluate.py
@@ -78,8 +79,8 @@ stages:
       nfiles: 24
     - path: models/model.pkl
       hash: md5
-      md5: 63cb30df484bfa1d6ea2cdebac74876c
-      size: 201725
+      md5: 518c16f42d088a9a11bf3212c475c632
+      size: 201277
     - path: src/evaluate.py
       hash: md5
       md5: 84d2fd3b371546730396a763a51527a0
@@ -93,8 +94,8 @@ stages:
     outs:
     - path: results/evaluate
       hash: md5
-      md5: 34985c391291e22ac0cfdf6e83ec7268.dir
-      size: 1257936
+      md5: e29311d7e185c4dc58e621b4fdbecc65.dir
+      size: 1258931
       nfiles: 11
   sagemaker:
     cmd: cp models/model.pth sagemaker/code/model.pth && cd sagemaker && tar -cpzf
@@ -102,10 +103,10 @@ stages:
     deps:
     - path: models/model.pth
       hash: md5
-      md5: 07b113fe1ab01de2d8a5453dccacdd3e
-      size: 165147
+      md5: 201f1e058e7b3aabc841078da26dc039
+      size: 164827
     outs:
     - path: model.tar.gz
       hash: md5
-      md5: c615b812da343d71fcda080597a24525
-      size: 145778
+      md5: f00679b8a27b229fc87e776f518af175
+      size: 145388

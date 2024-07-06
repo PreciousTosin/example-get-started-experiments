@@ -1,4 +1,7 @@
 [core]
-    remote = storage
+    remote = gdrive-remote
 ['remote "storage"']
     url = https://remote.dvc.org/get-started-pools
+['remote "gdrive-remote"']
+    url = gdrive://1Ue10yGRbWC3gN9mMdCz6QhLv33wne8tq/example-get-started-experiments
+    gdrive_use_service_account = true
